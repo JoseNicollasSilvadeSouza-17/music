@@ -1,0 +1,20 @@
+### Welcome
+GET http://localhost:3000/
+
+### Healthcheck
+GET http://localhost:3000/health/
+
+### Version
+GET http://localhost:3000/version/
+
+### Metrics
+GET http://localhost:3000/metrics/
+
+### List all Songs
+GET http://localhost:3000/api/v1/songs/
+
+### Count Songs
+GET http://localhost:3000/api/v1/songs/count/
+
+### List the Music 6a2f383c5e87a405b1dee80c
+GET http://localhost:3000/api/v1/songs/6a2f383c5e87a405b1dee80c/
