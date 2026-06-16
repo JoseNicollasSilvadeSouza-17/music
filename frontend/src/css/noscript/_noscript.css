@@ -1,0 +1,9 @@
+.no-js {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.no-js__title {
+	font-size: clamp(2rem, 1vw, 3rem);
+}

@@ -1,0 +1,15 @@
+.header__button,
+.app__button {
+	letter-spacing: 0.063rem;
+}
+
+.header__button {
+	padding: 0.5rem 0.8rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.app__button {
+	padding: 0.8rem 1rem;
+	font-size: clamp(1.25rem, 5vw, 1.6rem);
+}
