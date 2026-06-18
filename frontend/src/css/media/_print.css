@@ -1,0 +1,7 @@
+@media print {
+	.header__nav,
+	.app__button,
+	.footer {
+		display: none;
+	}
+}

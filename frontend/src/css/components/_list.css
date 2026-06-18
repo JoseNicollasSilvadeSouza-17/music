@@ -2,3 +2,21 @@
 	display: flex;
 	gap: 0.5rem;
 }
+
+.app__list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+	padding: 0.5rem;
+}
+
+.app__item {
+	border-radius: 1rem;
+	padding: 1rem;
+	background: #222;
+}
+
+.app__song-title {
+	font-size: 1.3rem;
+	font-weight: 700;
+}

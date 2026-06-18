@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { currentYear } from "../utils/date";
+import { currentYear } from "../../utils/date";
 
 export function Home() {
 	async function submit(event) {
@@ -24,6 +24,7 @@ export function Home() {
 			const result = await response.json();
 			toast.success("Música criada com sucesso!");
 		} catch (error) {
+			toast.error("Error realizado com sucesso!");
 			console.error(error);
 		}
 	}
