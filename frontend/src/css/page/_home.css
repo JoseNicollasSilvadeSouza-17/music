@@ -1,0 +1,13 @@
+.app__hero, .app__form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.app__form {
+	gap: 0.5rem;
+	padding: 1rem;
+	max-width: 30rem;
+	width: 100%;
+}

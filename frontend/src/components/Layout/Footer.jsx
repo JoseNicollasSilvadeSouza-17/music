@@ -1,6 +1,6 @@
-export function Footer() {
-	const currentYear = new Date().getFullYear().toString();
+import { currentYear } from "../../utils/date";
 
+export function Footer() {
 	return (
 		<footer className="footer">
 			<small className="footer__copyright">

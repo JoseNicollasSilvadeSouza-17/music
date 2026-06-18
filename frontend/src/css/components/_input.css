@@ -1,0 +1,14 @@
+.app__label {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1 1 2rem;
+	gap: 1rem;
+	width: 100%;
+}
+
+.app__input,
+.app__textarea {
+	padding: 0.5rem;
+	flex: 1 1 1rem;
+}

@@ -1,0 +1,6 @@
+.app__button {
+	padding: 0.5rem 0.8rem;
+	font-size: clamp(1.25rem, 2vw, 1.6rem);
+	font-weight: 700;
+	letter-spacing: 0.063rem;
+}

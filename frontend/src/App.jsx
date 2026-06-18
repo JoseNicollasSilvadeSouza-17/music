@@ -1,11 +1,11 @@
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
+import AppRouter from "./routes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	return (
 		<>
-			<Header />
-			<Footer />
+			<AppRouter />
+			<ToastContainer theme="dark" autoClose={1000} />
 		</>
 	);
 }
