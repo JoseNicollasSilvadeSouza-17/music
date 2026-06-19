@@ -1,10 +1,22 @@
 {
 	"songs": {
-		"_id": "",
-		"title": "Rock Dev",
-		"description": "",
-		"author": "José Teste",
-		"email": "jose-teste@gmail-teste.com",
-		"year": 2026 
+		"songs": [
+			{
+				"id": "",
+				"title": "Rock Dev",
+				"description": "",
+				"author": "José Teste",
+				"email": "jose-teste@gmail-teste.com",
+				"year": 2026
+			},
+			{
+				"id": "",
+				"title": "Rock Dev",
+				"description": "",
+				"author": "José Teste",
+				"email": "jose-teste@gmail-teste.com",
+				"year": 2026
+			}
+		]
 	}
 }
