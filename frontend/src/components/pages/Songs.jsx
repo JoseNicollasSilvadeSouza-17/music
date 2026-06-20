@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Printer } from "lucide-react";
+import { SEO } from "../seo/SEO";
 
 export default function Songs() {
 	const [songs, setSongs] = useState([]);
@@ -30,12 +31,20 @@ export default function Songs() {
 	}, []);
 	return (
 		<>
+			<SEO
+				title="Music - Songs"
+				description="Olhe a lista das melhores músicas criada da Terra no Music!🎵"
+			/>
+
 			<section className="app__songs">
 				<ul className="app__list">
 					{songs.map((song) => (
 						<li className="app__item" key={song._id || song.id}>
 							<span className="app__song-title">{song.title}</span>
 							<p className="app__p">Descrição: {song.description}</p>
+							<time className="app__year" dateTime={song.year}>
+								{song.year}
+							</time>
 						</li>
 					))}
 				</ul>
