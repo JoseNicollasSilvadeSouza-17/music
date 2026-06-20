@@ -55,10 +55,14 @@ const updateMusicSwaggerSchema = registry.register(
 const countSwaggerSchema = registry.register(
 	"Count Songs",
 	z.object({
-		count: z.number().int().openapi({
-			description: "Show the total number of songs.",
-			example: 10,
-		}),
+		count: z
+			.number()
+			.int()
+			.min(0, "The total number of songs cannot be less than 0")
+			.openapi({
+				description: "Show the total number of songs.",
+				example: 10,
+			}),
 	}),
 );
 
