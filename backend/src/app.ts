@@ -10,6 +10,8 @@ import helmet from "helmet";
 import { ZodError } from "zod";
 import { prometheusMetrics } from "./config/prometheusMetrics.js";
 import router from "./routes/music.route.js";
+import * as swaggerUi from "swagger-ui-express";
+import { swaggerDocs } from "./docs/swagger.js";
 
 const app: Application = express();
 
@@ -31,11 +33,14 @@ app.get("/", (req: Request, res: Response) => {
 	const responseData = {
 		message: "Welcome to the Music API!",
 		timestamp: new Date().toISOString(),
+		docs: "/docs",
 		uptime: process.uptime(),
 	};
 
 	return res.status(200).json(responseData);
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.get("/health", (req: Request, res: Response) => {
 	res.sendStatus(200);

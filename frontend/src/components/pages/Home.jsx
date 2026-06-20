@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { currentYear } from "../../utils/date";
+import { SEO } from "../seo/SEO";
 
 export function Home() {
 	async function submit(event) {
@@ -21,7 +22,7 @@ export function Home() {
 				body: JSON.stringify(musicData),
 			});
 
-			const result = await response.json();
+			await response.json();
 			toast.success("Música criada com sucesso!");
 		} catch (error) {
 			toast.error("Error realizado com sucesso!");
@@ -31,6 +32,11 @@ export function Home() {
 
 	return (
 		<>
+			<SEO
+				title="Music - Home"
+				description="Crie suas músicas com o melhor serviço de todos, o Music!🎵"
+			/>
+
 			<main className="app">
 				<section className="app__hero">
 					<img className="app__img" src="/src/assets/banner.png" alt="Banner" />
@@ -99,7 +105,7 @@ export function Home() {
 						Ano de Criação:
 						<input
 							className="app__input"
-							id="author"
+							id="year"
 							type="number"
 							name="year"
 							autoComplete="y"
@@ -110,7 +116,7 @@ export function Home() {
 							list="years"
 						/>
 						<datalist id="years">
-							<option value="2026"></option>
+							<option value={currentYear}></option>
 							<option value="2020"></option>
 							<option value="2010"></option>
 							<option value="2000"></option>
