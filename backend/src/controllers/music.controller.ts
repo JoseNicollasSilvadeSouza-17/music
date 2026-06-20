@@ -17,7 +17,7 @@ export default class MusicController {
 	async getSongs(req: Request, res: Response) {
 		const songs = await musicService.getSongs();
 
-		if (!songs) return console.error("Testo");
+		if (!songs) return res.sendStatus(404);
 
 		return res.json({ songs });
 	}
@@ -72,9 +72,17 @@ export default class MusicController {
 		return res.status(200).json(music);
 	}
 
+	async deleteSongs(req: Request, res: Response) {
+		const songs = await musicService.deleteSongs();
+
+		if (!songs || songs.deletedCount === 0) return res.sendStatus(404);
+
+		return res.sendStatus(204);
+	}
+
 	async deleteMusic(req: Request, res: Response) {
 		const id = objectIdSchema.parse(req.params.id);
-		
+
 		const music = await musicService.deleteMusic(id);
 
 		if (!music) return res.sendStatus(404);

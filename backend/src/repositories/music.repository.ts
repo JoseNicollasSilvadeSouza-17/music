@@ -32,6 +32,10 @@ export default class MusicRepository {
 		return await musicSchema.findByIdAndUpdate(id, musicData, { new: true });
 	}
 
+	async deleteSongs() {
+		return await musicSchema.deleteMany({});
+	}
+	
 	async deleteMusic(id: string) {
 		return await musicSchema.findByIdAndDelete(id);
 	}

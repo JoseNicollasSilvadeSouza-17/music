@@ -17,6 +17,8 @@ router.put("/:id", musicController.putMusic);
 
 router.patch("/:id", musicController.patchMusic);
 
+router.delete("/", musicController.deleteSongs);
+
 router.delete("/:id", musicController.deleteMusic);
 
 export default router;

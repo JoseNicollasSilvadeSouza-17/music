@@ -68,6 +68,16 @@ export default class MusicService {
 		return music;
 	}
 
+	async deleteSongs() {
+		const songs = await musicRepository.deleteSongs();
+
+		if (songs && songs.deletedCount > 0) {
+			await redis.flushdb();
+		}
+
+		return songs;
+	}
+
 	async deleteMusic(id: string) {
 		const music = await musicRepository.deleteMusic(id);
 

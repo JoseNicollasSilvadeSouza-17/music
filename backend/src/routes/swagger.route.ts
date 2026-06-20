@@ -58,6 +58,22 @@ registry.registerPath({
 });
 
 registry.registerPath({
+	method: "delete",
+	path: "/",
+	summary: "Delete all songs",
+	description: "This route responsible for deleting all songs.",
+	tags: ["Music"],
+	responses: {
+		204: {
+			description: "All songs successfully deleted.",
+		},
+		404: {
+			description: "Music not found.",
+		},
+	},
+});
+
+registry.registerPath({
 	method: "get",
 	path: "/count",
 	summary: "Count total songs",
