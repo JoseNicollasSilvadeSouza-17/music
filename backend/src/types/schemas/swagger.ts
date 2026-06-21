@@ -1,13 +1,9 @@
-import z from "zod";
-import { OBJECT_ID_MONGODB } from "../utils/regexp.js";
-import { registry } from "../config/swaggerSetup.js";
-import { musicSchema } from "./IMusic.js";
-import { CreateMusicSchema } from "./MusicDTO.js";
-import { exampleComplete, exampleSimple } from "../utils/examples.js";
-
-const objectIdSchema = z
-	.string()
-	.regex(OBJECT_ID_MONGODB, "Invalid MongoDB ObjectId format");
+import { z } from "../../config/swaggerSetup.js";
+import { registry } from "../../config/swaggerSetup.js";
+import { musicSchema } from "../IMusic.js";
+import { CreateMusicSchema } from "../MusicDTO.js";
+import { exampleComplete, exampleSimple } from "../../utils/examples.js";
+import { captionSchema } from "./MusicSchemas.js";
 
 const createWithUniqueEmail = CreateMusicSchema.extend({
 	email: CreateMusicSchema.shape.email.openapi({
@@ -66,11 +62,61 @@ const countSwaggerSchema = registry.register(
 	}),
 );
 
+const posterSwaggerSchema = registry.register(
+	"Poster Schema",
+	z.string().openapi({
+		type: "string",
+		format: "binary",
+		description: "Poster image file",
+	}),
+);
+
+const createPosterBodySchema = z.object({
+	poster: posterSwaggerSchema,
+});
+
+const audioSwaggerSchema = registry.register(
+	"Audio Schema",
+	z.string().openapi({
+		type: "string",
+		format: "binary",
+		description: "Audio file",
+	}),
+);
+
+const createAudioBodySchema = z.object({
+	audio: audioSwaggerSchema,
+});
+
+const clipSwaggerSchema = registry.register(
+	"Clip Schema",
+	z.string().openapi({
+		type: "string",
+		format: "binary",
+		description: "Video archive of the music video",
+	}),
+);
+
+const captionSwaggerSchema = registry.register(
+	"Caption Schema",
+	captionSchema.openapi({
+		description: "Lyrics for the song",
+		example: exampleComplete.caption
+	}),
+);
+
+const createClipBodySchema = z.object({
+	clip: clipSwaggerSchema,
+	caption: captionSwaggerSchema,
+});
+
 export {
-	objectIdSchema,
 	musicSwaggerSchema,
 	createMusicSwaggerSchema,
 	replaceMusicSwaggerSchema,
 	updateMusicSwaggerSchema,
 	countSwaggerSchema,
+	createPosterBodySchema,
+	createAudioBodySchema,
+	createClipBodySchema,
 };

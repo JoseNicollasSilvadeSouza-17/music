@@ -1,6 +1,6 @@
-import type z from "zod";
-import { captionSchema, musicSchema,  } from "./IMusic.js";
-import type { objectIdSchema } from "./MusicSchemas.js";
+import { z } from "../config/swaggerSetup.js";
+import { musicSchema } from "./IMusic.js";
+import type { objectIdSchema, captionSchema } from "./schemas/MusicSchemas.js";
 
 const CreateMusicSchema = musicSchema.pick({
 	title: true,

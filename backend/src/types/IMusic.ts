@@ -1,16 +1,7 @@
 import z from "zod";
 import { currentYear } from "../utils/date.js";
-import { ISO_LANGUAGE_REGEX } from "../utils/regexp.js";
+import { captionSchema } from "./schemas/MusicSchemas.js";
 
-export const captionSchema = z.record(
-	z
-		.string()
-		.regex(
-			ISO_LANGUAGE_REGEX,
-			"The key must be a valid ISO language code (e.g., en [English], es [Spanish], and pt-BR [Brazilian Portuguese])",
-		),
-	z.string().min(2, "The caption must be at least 2 characters long"),
-);
 
 const musicSchema = z.object({
 	title: z.string().min(1, "Title is required"),

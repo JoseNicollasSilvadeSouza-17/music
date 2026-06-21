@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import MusicRepository from "../repositories/music.repository.js";
-import { objectIdSchema } from "../types/MusicSchemas.js";
+import { captionSchema, objectIdSchema } from "../types/schemas/MusicSchemas.js";
 import {
 	CreateMusicSchema,
 	ReplaceMusicSchema,
@@ -10,7 +10,6 @@ import {
 	type UpdateMusicDto,
 } from "../types/MusicDTO.js";
 import MusicService from "../services/music.service.js";
-import { captionSchema } from "../types/IMusic.js";
 
 const musicRepository = new MusicRepository();
 const musicService = new MusicService();
