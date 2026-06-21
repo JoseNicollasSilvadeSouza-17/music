@@ -4,11 +4,13 @@ import { objectIdSchema } from "../types/MusicSchemas.js";
 import {
 	CreateMusicSchema,
 	ReplaceMusicSchema,
+	type CaptionType,
 	type CreateMusicDto,
 	type ReplaceMusicDto,
 	type UpdateMusicDto,
 } from "../types/MusicDTO.js";
 import MusicService from "../services/music.service.js";
+import { captionSchema } from "../types/IMusic.js";
 
 const musicRepository = new MusicRepository();
 const musicService = new MusicService();
@@ -48,6 +50,49 @@ export default class MusicController {
 		if (!music) return res.sendStatus(404);
 
 		return res.status(201).json(music);
+	}
+
+	async postMusicUploadPoster(req: Request, res: Response) {
+		const id = objectIdSchema.parse(req.params.id);
+		const file = req.file;
+
+		if (!file) return res.sendStatus(400);
+
+		const music = await musicService.addMusicUploadPoster(id, file);
+
+		if (!music) return res.sendStatus(404);
+
+		return res.status(200).json(music);
+	}
+
+	async postMusicUploadAudio(req: Request, res: Response) {
+		const id = objectIdSchema.parse(req.params.id);
+		const file = req.file;
+
+		if (!file) return res.sendStatus(400);
+
+		const music = await musicService.addMusicUploadAudio(id, file);
+
+		if (!music) return res.sendStatus(404);
+
+		return res.status(200).json(music);
+	}
+
+	async postMusicUploadClip(req: Request, res: Response) {
+		const id = objectIdSchema.parse(req.params.id);
+		const file = req.file;
+		const caption: CaptionType = captionSchema.parse(
+			JSON.parse(req.body.caption),
+		);
+
+		if (!file) return res.sendStatus(400);
+		if (!caption) return res.sendStatus(400);
+
+		const music = await musicService.addMusicUploadClip(id, file, caption);
+
+		if (!music) return res.sendStatus(404);
+
+		return res.status(200).json(music);
 	}
 
 	async putMusic(req: Request, res: Response) {

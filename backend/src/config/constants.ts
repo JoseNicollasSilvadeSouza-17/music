@@ -21,4 +21,27 @@ const REDIS_TOKEN: string = z
 	.min(2, "Invalid Redis Token")
 	.parse(process.env.UPSTASH_REDIS_REST_TOKEN);
 
-export { PORT, MONGODB_URI, REDIS_URL, REDIS_TOKEN };
+const CLOUD_NAME: string = z
+	.string()
+	.min(2, "Invalid Cloud Name!")
+	.parse(process.env.CLOUD_NAME);
+
+const CLOUD_API_KEY: string = z
+	.string()
+	.min(2, "Invalid API Key!")
+	.parse(process.env.API_KEY);
+
+const CLOUD_API_SECRET: string = z
+	.string()
+	.min(2, "Invalid API Secret!")
+	.parse(process.env.API_SECRET);
+
+export {
+	PORT,
+	MONGODB_URI,
+	REDIS_URL,
+	REDIS_TOKEN,
+	CLOUD_NAME,
+	CLOUD_API_KEY,
+	CLOUD_API_SECRET,
+};

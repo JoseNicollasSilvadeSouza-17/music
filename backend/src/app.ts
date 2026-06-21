@@ -12,6 +12,7 @@ import { prometheusMetrics } from "./config/prometheusMetrics.js";
 import router from "./routes/music.route.js";
 import * as swaggerUi from "swagger-ui-express";
 import { swaggerDocs } from "./docs/swagger.js";
+import multer from "multer";
 
 const app: Application = express();
 
@@ -53,6 +54,8 @@ app.get("/version", (req: Request, res: Response) => {
 app.get("/metrics", prometheusMetrics);
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
+	if (error instanceof multer.MulterError) return res.status(400).json(error);
+
 	if (error instanceof ZodError) return res.status(400).json(error.issues);
 
 	console.error(error);
