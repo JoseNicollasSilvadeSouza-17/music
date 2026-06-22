@@ -100,6 +100,7 @@ const clipSwaggerSchema = registry.register(
 const captionSwaggerSchema = registry.register(
 	"Caption Schema",
 	captionSchema.openapi({
+		type: "object",
 		description: "Lyrics for the song",
 		example: exampleComplete.caption
 	}),

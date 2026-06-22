@@ -16,6 +16,10 @@ import multer from "multer";
 
 const app: Application = express();
 
+const swaggerOptions = {
+	requestSnippetsEnabled: true,
+};
+
 app.use(morgan("dev"));
 
 app.use(
@@ -41,7 +45,11 @@ app.get("/", (req: Request, res: Response) => {
 	return res.status(200).json(responseData);
 });
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use(
+	"/docs",
+	swaggerUi.serve,
+	swaggerUi.setup(swaggerDocs, { swaggerOptions }),
+);
 
 app.get("/health", (req: Request, res: Response) => {
 	res.sendStatus(200);
