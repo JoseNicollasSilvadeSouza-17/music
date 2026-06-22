@@ -1,4 +1,4 @@
-const ISO_LANGUAGE_REGEX: RegExp = /^[a-z]{2}(-[a-zA-Z]{2,4})?$/;
+const ISO_LANGUAGE_REGEX: RegExp = /^[a-z]{2}(-[a-zA-Z0-9]{2,4})?$/;
 
 const OBJECT_ID_MONGODB: RegExp = /^[0-9a-fA-F]{24}$/;
 

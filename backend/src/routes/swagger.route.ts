@@ -1,13 +1,16 @@
 import z from "zod";
 import { registry } from "../config/swaggerSetup.js";
+import { objectIdSchema } from "../types/schemas/MusicSchemas.js";
 import {
 	countSwaggerSchema,
 	createMusicSwaggerSchema,
 	musicSwaggerSchema,
-	objectIdSchema,
 	replaceMusicSwaggerSchema,
 	updateMusicSwaggerSchema,
-} from "../types/MusicSchemas.js";
+	createPosterBodySchema,
+	createAudioBodySchema,
+	createClipBodySchema,
+} from "../types/schemas/swagger.js";
 
 registry.registerPath({
 	method: "get",
@@ -53,6 +56,22 @@ registry.registerPath({
 		},
 		409: {
 			description: "Conflict: Email already registered.",
+		},
+	},
+});
+
+registry.registerPath({
+	method: "delete",
+	path: "/",
+	summary: "Delete all songs",
+	description: "This route responsible for deleting all songs.",
+	tags: ["Music"],
+	responses: {
+		204: {
+			description: "All songs successfully deleted.",
+		},
+		404: {
+			description: "Music not found.",
 		},
 	},
 });
@@ -176,6 +195,107 @@ registry.registerPath({
 	responses: {
 		204: {
 			description: "Music deleted successfully.",
+		},
+		404: {
+			description: "Music not found.",
+		},
+	},
+});
+
+registry.registerPath({
+	method: "post",
+	path: "/{id}/upload/poster",
+	summary: "Upload poster",
+	description: "This route is responsible for uploading the poster.",
+	tags: ["Music"],
+	request: {
+		params: z.object({
+			id: objectIdSchema,
+		}),
+		body: {
+			content: {
+				"multipart/form-data": {
+					schema: createPosterBodySchema,
+				},
+			},
+		},
+	},
+	responses: {
+		201: {
+			description: "Poster upload successful.",
+			content: {
+				"application/json": {
+					schema: musicSwaggerSchema,
+				},
+			},
+		},
+		404: {
+			description: "Music not found.",
+		},
+	},
+});
+
+registry.registerPath({
+	method: "post",
+	path: "/{id}/upload/audio",
+	summary: "Upload audio",
+	description: "This route is responsible for uploading the audio.",
+	tags: ["Music"],
+	request: {
+		params: z.object({
+			id: objectIdSchema,
+		}),
+		body: {
+			content: {
+				"multipart/form-data": {
+					schema: createAudioBodySchema,
+				},
+			},
+		},
+	},
+	responses: {
+		201: {
+			description: "Audio upload completed successfully.",
+			content: {
+				"application/json": {
+					schema: musicSwaggerSchema,
+				},
+			},
+		},
+		404: {
+			description: "Music not found.",
+		},
+	},
+});
+
+registry.registerPath({
+	method: "post",
+	path: "/{id}/upload/clip",
+	summary: "Upload the video clip and the caption(s)",
+	description:
+		"This route is responsible for uploading the clip and the subtitle(s).",
+	tags: ["Music"],
+	request: {
+		params: z.object({
+			id: objectIdSchema,
+		}),
+		body: {
+			content: {
+				"multipart/form-data": {
+					schema: createClipBodySchema,
+				},
+			},
+		},
+	},
+	responses: {
+		201: {
+			description:
+				"The upload of the clip and subtitle(s) was completed successfully.",
+			content: {
+				"application/json": {
+					schema: musicSwaggerSchema,
+				},
+			},
 		},
 		404: {
 			description: "Music not found.",

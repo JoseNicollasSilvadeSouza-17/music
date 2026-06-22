@@ -12,8 +12,13 @@ import { prometheusMetrics } from "./config/prometheusMetrics.js";
 import router from "./routes/music.route.js";
 import * as swaggerUi from "swagger-ui-express";
 import { swaggerDocs } from "./docs/swagger.js";
+import multer from "multer";
 
 const app: Application = express();
+
+const swaggerOptions = {
+	requestSnippetsEnabled: true,
+};
 
 app.use(morgan("dev"));
 
@@ -40,7 +45,11 @@ app.get("/", (req: Request, res: Response) => {
 	return res.status(200).json(responseData);
 });
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use(
+	"/docs",
+	swaggerUi.serve,
+	swaggerUi.setup(swaggerDocs, { swaggerOptions }),
+);
 
 app.get("/health", (req: Request, res: Response) => {
 	res.sendStatus(200);
@@ -53,6 +62,8 @@ app.get("/version", (req: Request, res: Response) => {
 app.get("/metrics", prometheusMetrics);
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
+	if (error instanceof multer.MulterError) return res.status(400).json(error);
+
 	if (error instanceof ZodError) return res.status(400).json(error.issues);
 
 	console.error(error);

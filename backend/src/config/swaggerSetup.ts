@@ -5,4 +5,4 @@ extendZodWithOpenApi(z);
 
 const registry = new OpenAPIRegistry();
 
-export { registry };
+export { registry, z };

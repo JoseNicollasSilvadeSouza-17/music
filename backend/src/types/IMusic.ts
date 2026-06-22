@@ -1,6 +1,7 @@
 import z from "zod";
-import { ISO_LANGUAGE_REGEX } from "../utils/regexp.js";
 import { currentYear } from "../utils/date.js";
+import { captionSchema } from "./schemas/MusicSchemas.js";
+
 
 const musicSchema = z.object({
 	title: z.string().min(1, "Title is required"),
@@ -15,17 +16,7 @@ const musicSchema = z.object({
 	posterUrl: z.url({ error: "Invalid poster URL" }).optional(),
 	audioUrl: z.url({ error: "Invalid audio URL" }).optional(),
 	clipUrl: z.url({ error: "Invalid clip URL" }).optional(),
-	caption: z
-		.record(
-			z
-				.string()
-				.regex(
-					ISO_LANGUAGE_REGEX,
-					"The key must be a valid ISO language code (e.g., en [English], es [Spanish], and pt-BR [Brazilian Portuguese])",
-				),
-			z.string().min(2, "The caption must be at least 2 characters long"),
-		)
-		.optional(),
+	caption: captionSchema.optional(),
 	isoZipUrl: z.url({ error: "Invalid ISO Zip file URL" }).optional(),
 });
 
