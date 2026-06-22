@@ -16,4 +16,16 @@ const captionSchema = z.record(
 	z.string().min(2, "The caption must be at least 2 characters long"),
 );
 
-export { objectIdSchema, captionSchema };
+const emailSchema = z.email({ error: "Provide a valid email address" });
+
+const authorSchema = z.string().min(2, "Author name too short");
+
+const titleSchema = z.string().min(1, "Title is required");
+
+export {
+	objectIdSchema,
+	captionSchema,
+	emailSchema,
+	authorSchema,
+	titleSchema,
+};

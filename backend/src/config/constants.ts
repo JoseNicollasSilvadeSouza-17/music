@@ -36,6 +36,27 @@ const CLOUD_API_SECRET: string = z
 	.min(2, "Invalid API Secret!")
 	.parse(process.env.API_SECRET);
 
+const MAILTRAP_HOST: string = z
+	.string()
+	.min(2, "Invalid MailTrap host!")
+	.parse(process.env.MAILTRAP_HOST);
+
+const MAILTRAP_PORT: number = z
+	.string()
+	.default("2525")
+	.transform(Number)
+	.parse(process.env.MAILTRAP_PORT);
+
+const MAILTRAP_USER: string = z
+	.string()
+	.min(2, "Invalid username!")
+	.parse(process.env.MAILTRAP_USERNAME);
+
+const MAILTRAP_PASS: string = z
+	.string()
+	.min(2, "Ivalind passowrd!")
+	.parse(process.env.MAILTRAP_PASSWORD);
+
 export {
 	PORT,
 	MONGODB_URI,
@@ -44,4 +65,8 @@ export {
 	CLOUD_NAME,
 	CLOUD_API_KEY,
 	CLOUD_API_SECRET,
+	MAILTRAP_HOST,
+	MAILTRAP_PORT,
+	MAILTRAP_USER,
+	MAILTRAP_PASS,
 };

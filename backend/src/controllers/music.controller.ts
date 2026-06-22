@@ -1,6 +1,9 @@
 import type { Request, Response } from "express";
 import MusicRepository from "../repositories/music.repository.js";
-import { captionSchema, objectIdSchema } from "../types/schemas/MusicSchemas.js";
+import {
+	captionSchema,
+	objectIdSchema,
+} from "../types/schemas/MusicSchemas.js";
 import {
 	CreateMusicSchema,
 	ReplaceMusicSchema,
@@ -10,10 +13,11 @@ import {
 	type UpdateMusicDto,
 } from "../types/MusicDTO.js";
 import MusicService from "../services/music.service.js";
+import EmailService from "../services/email.service.js";
 
 const musicRepository = new MusicRepository();
 const musicService = new MusicService();
-
+const emailService = new EmailService();
 export default class MusicController {
 	async getSongs(req: Request, res: Response) {
 		const songs = await musicService.getSongs();
@@ -47,6 +51,8 @@ export default class MusicController {
 		const music = await musicService.addMusic(musicData);
 
 		if (!music) return res.sendStatus(404);
+
+		await emailService.sendWelcome(music.email, music.author, music.title);
 
 		return res.status(201).json(music);
 	}
