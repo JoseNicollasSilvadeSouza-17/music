@@ -1,13 +1,17 @@
 import z from "zod";
 import { currentYear } from "../utils/date.js";
-import { captionSchema } from "./schemas/MusicSchemas.js";
-
+import {
+	captionSchema,
+	emailSchema,
+	authorSchema,
+	titleSchema,
+} from "./schemas/MusicSchemas.js";
 
 const musicSchema = z.object({
-	title: z.string().min(1, "Title is required"),
+	title: titleSchema,
 	description: z.string().min(2, "Description too short"),
-	author: z.string().min(2, "Author name too short"),
-	email: z.email({ error: "Provide a valid email address" }),
+	author: authorSchema,
+	email: emailSchema,
 	year: z
 		.number()
 		.int()
